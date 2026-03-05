@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "800971991527",
+    "project_id": "aethera-admin042025",
+    "storage_bucket": "aethera-admin042025.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:800971991527:android:09594c55d58d47ad90f542",
+        "android_client_info": {
+          "package_name": "com.example.aethera"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS6X7e8Z0SQDZ908Cp6qCNtznInZVywac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:800971991527:android:1ec0e9966ef432ba90f542",
+        "android_client_info": {
+          "package_name": "com.example.aetheraadmin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS6X7e8Z0SQDZ908Cp6qCNtznInZVywac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
