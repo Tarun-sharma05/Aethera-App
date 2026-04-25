@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aethera.common.ResultState
 import com.example.aethera.domain.models.category
+import com.example.aethera.domain.models.productDataModel
 import com.example.aethera.domain.usecase.GetAllCategoryUseCase
+import com.example.aethera.domain.usecase.GetAllProductUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,12 +17,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AppViewModel @Inject constructor(
-    private val GetAllCategory: GetAllCategoryUseCase
+    private val GetAllCategory: GetAllCategoryUseCase,
+    private val GetAllProduct: GetAllProductUseCase
 ) : ViewModel() {
 
      private val _getAllCategoryState = MutableStateFlow(GetCategoryState())
     val getAllCategoryState = _getAllCategoryState.asStateFlow()
-    
+
+    private val _getAllProductState = MutableStateFlow(GetProductState())
+    val getAllProductState = _getAllProductState.asStateFlow()
 
     fun getAllCategory(){
         viewModelScope.launch {
@@ -43,6 +48,27 @@ class AppViewModel @Inject constructor(
     }
 
 
+    fun getAllProduct(){
+        viewModelScope.launch {
+            GetAllProduct.getAllProductUseCase().collectLatest{
+                when(it){
+                    is ResultState.Loading -> {
+                        _getAllProductState.value = GetProductState(isLoading = true)
+                    }
+                    is ResultState.Success -> {
+                        _getAllProductState.value = GetProductState(data = it.data)
+                    }
+                    is ResultState.Error -> {
+                        _getAllProductState.value = GetProductState(error = it.error)
+                    }
+                }
+
+            }
+        }
+
+    }
+
+
 }
 
 
@@ -53,5 +79,10 @@ data class GetCategoryState(
     val data: List<category?> = emptyList()
 )
 
+data class GetProductState(
+    val isLoading: Boolean = false,
+    val error: String = "",
+    val data: List<productDataModel?> = emptyList()
+)
 
 

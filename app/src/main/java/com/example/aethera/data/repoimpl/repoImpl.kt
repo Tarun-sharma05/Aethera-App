@@ -1,8 +1,10 @@
 package com.example.aethera.data.repoimpl
 
 import com.example.aethera.common.CATEGORY
+import com.example.aethera.common.PRODUCTS
 import com.example.aethera.common.ResultState
 import com.example.aethera.domain.models.category
+import com.example.aethera.domain.models.productDataModel
 import com.example.aethera.domain.repo.repo
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObjects
@@ -10,6 +12,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
+import kotlin.jvm.java
 
 
 class repoImpl @Inject constructor(private val firebaseFirestore: FirebaseFirestore): repo {
@@ -35,14 +38,14 @@ class repoImpl @Inject constructor(private val firebaseFirestore: FirebaseFirest
           }
     }
 
-     override fun getAllProducts(): Flow<ResultState<List<product>>> = callbackFlow {
+     override fun getAllProducts(): Flow<ResultState<List<productDataModel>>> = callbackFlow {
         trySend(ResultState.Loading)
 
         firebaseFirestore.collection(PRODUCTS).get()
             .addOnSuccessListener {
 
                 val productData = it.documents.mapNotNull {
-                    it.toObject(product::class.java)
+                    it.toObject(productDataModel::class.java)
                 }
 
 

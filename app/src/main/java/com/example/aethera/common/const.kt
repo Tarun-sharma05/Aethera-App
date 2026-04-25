@@ -1,7 +1,7 @@
 package com.example.aethera.common
 
 const val CATEGORY = "CATEGORY"
-const val PRODUCT = "PRODUCTS"
+const val PRODUCTS = "PRODUCTS"
 const val USER = "USER"
 const val CART = "CART"
 const val ORDER = "ORDER"
