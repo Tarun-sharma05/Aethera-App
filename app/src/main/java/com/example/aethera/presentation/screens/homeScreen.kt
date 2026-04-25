@@ -20,22 +20,25 @@ fun homeScreen(
     viewModel: AppViewModel = hiltViewModel()
 ) {
 
-    val state = viewModel.getAllCategoryState.collectAsState()
+    val homestate by viewModel.homeScreenState.collectAsStateWithLifecycle()
+//    LaunchedEffect(key1 = Unit) {
+//        viewModel.getAllCategory()
+//    }
+//
+//    Column(modifier = Modifier.fillMaxSize(),
+//         verticalArrangement = Arrangement.Center,
+//        horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
+//        LazyRow {
+//            items(homestate.value.data){
+//                Text(text = it!!.name)
+//                Text(text = it.imageUrl.toString())
+//
+//            }
+//        }
+//    }
 
-    LaunchedEffect(key1 = Unit) {
-        viewModel.getAllCategory()
-    }
+    if (homestate.isLoading)
 
-    Column(modifier = Modifier.fillMaxSize(),
-         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-        LazyRow {
-            items(state.value.data){
-                Text(text = it!!.name)
-                Text(text = it.imageUrl.toString())
 
-            }
-        }
-    }
 }

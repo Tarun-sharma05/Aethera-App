@@ -20,6 +20,7 @@ class AppViewModel @Inject constructor(
 
      private val _getAllCategoryState = MutableStateFlow(GetCategoryState())
     val getAllCategoryState = _getAllCategoryState.asStateFlow()
+    
 
     fun getAllCategory(){
         viewModelScope.launch {

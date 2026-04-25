@@ -35,4 +35,26 @@ class repoImpl @Inject constructor(private val firebaseFirestore: FirebaseFirest
           }
     }
 
+     override fun getAllProducts(): Flow<ResultState<List<product>>> = callbackFlow {
+        trySend(ResultState.Loading)
+
+        firebaseFirestore.collection(PRODUCTS).get()
+            .addOnSuccessListener {
+
+                val productData = it.documents.mapNotNull {
+                    it.toObject(product::class.java)
+                }
+
+
+                trySend(ResultState.Success(productData))
+            }.addOnFailureListener {
+                trySend(ResultState.Error(it.toString()))
+            }
+
+        awaitClose {
+            close()
+          }
+    }
+
+
 }
