@@ -38,7 +38,9 @@ fun homeScreen(
 //        }
 //    }
 
-    if (homestate.isLoading)
+    if (homestate.isLoading){
+
+    }
 
 
 }
