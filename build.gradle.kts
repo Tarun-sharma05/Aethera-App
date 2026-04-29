@@ -3,14 +3,13 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.compose) apply false
-
-    id("com.google.dagger.hilt.android") version "2.59.2" apply false
+    alias(libs.plugins.kotlin.serialization) apply false
     id("com.google.devtools.ksp") version "2.3.6" apply false
     id("com.google.gms.google-services") version "4.4.4" apply false
 }
-val buildToolsVersion by extra("35.0.0")
-val defaultTargetSdkVersion by extra(35)
-val buildToolsVersion1 by extra(buildToolsVersion)
+
+val buildToolsVersion by extra("36.0.0")
 val compileSdkVersion by extra(36)
-val defaultTargetSdkVersion1 by extra(36)
+val defaultTargetSdkVersion by extra(36)
 val defaultMinSdkVersion by extra(27)
+val targetCompatibility by extra(JavaVersion.VERSION_17)
