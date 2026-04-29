@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="ic_launcher (1)/res/mipmap-xxxhdpi/ic_launcher.png" width="120" height="120" />
+</p>
+
 # Aethera — Premium E-Commerce Experience
 
 Aethera is a modern, high-performance customer-facing Android application built with a focus on rich aesthetics and a robust, scalable architecture. It serves as the companion app to AetheraAdmin, offering a seamless shopping experience powered by Firebase and the latest Jetpack Compose technologies.
