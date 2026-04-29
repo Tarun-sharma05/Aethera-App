@@ -1,22 +1,19 @@
 package com.example.aethera.presentation.viewModel
 
-import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aethera.common.ResultState
-import com.example.aethera.domain.models.category
+import com.example.aethera.domain.models.Category
 import com.example.aethera.domain.models.productDataModel
 import com.example.aethera.domain.usecase.GetAllCategoryUseCase
 import com.example.aethera.domain.usecase.GetAllProductUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class AppViewModel @Inject constructor(
+
+class AppViewModel constructor(
     private val GetAllCategory: GetAllCategoryUseCase,
     private val GetAllProduct: GetAllProductUseCase
 ) : ViewModel() {
@@ -76,7 +73,7 @@ class AppViewModel @Inject constructor(
 data class GetCategoryState(
     val isLoading: Boolean = false,
     val error: String = "",
-    val data: List<category?> = emptyList()
+    val data: List<Category?> = emptyList()
 )
 
 data class GetProductState(
