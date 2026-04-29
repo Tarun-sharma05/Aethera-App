@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#46464a",
+                    "on-secondary-fixed-variant": "#484643",
+                    "tertiary-container": "#1f1b1a",
+                    "tertiary-fixed-dim": "#cdc5c3",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-tint": "#5f5e60",
+                    "surface-container-low": "#f7f3f2",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#605e5a",
+                    "on-surface": "#1c1b1b",
+                    "surface-container": "#f1edec",
+                    "surface-variant": "#e5e2e1",
+                    "surface-dim": "#ddd9d9",
+                    "on-background": "#1c1b1b",
+                    "primary": "#010102",
+                    "background": "#fdf8f8",
+                    "on-primary-fixed": "#1b1b1d",
+                    "on-primary-fixed-variant": "#474649",
+                    "tertiary-fixed": "#eae0de",
+                    "on-tertiary-container": "#8a8381",
+                    "error-container": "#ffdad6",
+                    "inverse-on-surface": "#f4f0ef",
+                    "surface-container-high": "#ebe7e7",
+                    "secondary-container": "#e6e2dd",
+                    "primary-fixed-dim": "#c8c6c8",
+                    "on-secondary-fixed": "#1d1b19",
+                    "on-tertiary-fixed-variant": "#4b4644",
+                    "surface": "#fdf8f8",
+                    "tertiary": "#010100",
+                    "on-secondary-container": "#666460",
+                    "inverse-primary": "#c8c6c8",
+                    "primary-container": "#1c1c1e",
+                    "outline": "#77767b",
+                    "surface-bright": "#fdf8f8",
+                    "error": "#ba1a1a",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#1f1b1a",
+                    "outline-variant": "#c7c6ca",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e5e2e1",
+                    "secondary-fixed": "#e6e2dd",
+                    "secondary-fixed-dim": "#cac6c1",
+                    "primary-fixed": "#e4e2e4",
+                    "on-primary-container": "#858486",
+                    "inverse-surface": "#313030",
+                    "amber-gold": "#D4AF37"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "gutter": "12px",
+                    "xs": "8px",
+                    "base": "4px",
+                    "lg": "24px",
+                    "md": "16px",
+                    "sm": "12px",
+                    "xl": "32px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-lg": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "label-md": ["11px", {"lineHeight": "16px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tap-highlight-transparent {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
+<div class="relative w-full h-[574px] overflow-hidden">
+<img alt="Product Hero" class="w-full h-full object-cover" data-alt="Minimalist fashion photography of a young woman in an oversized beige linen shirt standing against a clean cream-colored wall in soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_PicF_tBbLieHDahrtxulmctY-KKVQNZtFR3uewqiZVlDqlgYsjtdUJmABUwsNpn53r3vuLWS1sdwg1gzoEBQwdOUDjPgh3NZUyoACBHp9crhhUWz1H2G7JrwGxoF60nL4THvRntWCYi14V762tG0wTIhcA9xJ7DSb9i14hP82olcPcWq0KASOsqsxlLQduFFEWDAsrtVFc3qyRKAWBzzL3VDDEPv3BH3ndyOqQ52ii1r5Wd3JLL9IoOXtyHt2C9ANmFjFaPsmxA"/>
+<div class="absolute top-0 left-0 w-full p-margin-mobile flex justify-between items-center z-10">
+<button class="w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full shadow-sm text-stone-900 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full shadow-sm text-stone-900 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</div>
+<main class="relative -mt-8 bg-surface rounded-t-[32px] px-margin-mobile pt-xl pb-40">
+<div class="flex flex-col gap-sm mb-xl">
+<div class="flex justify-between items-start">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Luna Oversized Linen Shirt</h1>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-amber-500 text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-lg text-label-lg text-on-surface-variant">4.5</span>
+</div>
+</div>
+<p class="font-headline-md text-headline-md text-on-surface">$120</p>
+</div>
+<section class="mb-xl">
+<h3 class="font-label-lg text-label-lg uppercase tracking-widest text-on-surface-variant mb-md">Select Size</h3>
+<div class="flex flex-wrap gap-sm">
+<button class="px-lg py-sm rounded-xl border border-outline text-on-surface font-label-lg hover:border-primary transition-colors active:scale-95">S</button>
+<button class="px-lg py-sm rounded-xl bg-primary text-on-primary font-label-lg active:scale-95 shadow-lg">M</button>
+<button class="px-lg py-sm rounded-xl border border-outline text-on-surface font-label-lg hover:border-primary transition-colors active:scale-95">L</button>
+<button class="px-lg py-sm rounded-xl border border-outline text-on-surface font-label-lg hover:border-primary transition-colors active:scale-95">XL</button>
+</div>
+</section>
+<section class="mb-xl">
+<div class="border-t border-surface-variant pt-lg flex justify-between items-center">
+<h3 class="font-title-lg text-title-lg text-on-surface">Product Details</h3>
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+<div class="mt-md">
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                    Crafted from 100% sustainable European linen, the Luna shirt offers an effortless, airy silhouette. Features dropped shoulders, a curved hemline, and delicate shell buttons. Perfect for layering or as a standalone statement piece.
+                </p>
+<ul class="mt-md space-y-xs font-body-md text-body-md text-on-surface-variant">
+<li class="flex items-center gap-xs"><span class="w-1 h-1 bg-on-surface-variant rounded-full"></span> Eco-conscious linen</li>
+<li class="flex items-center gap-xs"><span class="w-1 h-1 bg-on-surface-variant rounded-full"></span> Relaxed, breathable fit</li>
+<li class="flex items-center gap-xs"><span class="w-1 h-1 bg-on-surface-variant rounded-full"></span> Machine washable</li>
+</ul>
+</div>
+</section>
+<section class="grid grid-cols-2 gap-md pt-md border-t border-surface-variant">
+<div class="flex flex-col gap-base">
+<span class="font-label-md text-label-md text-on-surface-variant">Material</span>
+<span class="font-body-md text-body-md text-on-surface">100% Organic Linen</span>
+</div>
+<div class="flex flex-col gap-base">
+<span class="font-label-md text-label-md text-on-surface-variant">Care</span>
+<span class="font-body-md text-body-md text-on-surface">Gentle Cold Wash</span>
+</div>
+</section>
+<section class="mt-xl">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md px-base">You May Also Like</h3>
+<div class="flex overflow-x-auto gap-md pb-md scrollbar-hide -mx-margin-mobile px-margin-mobile">
+<!-- Product Card 1 -->
+<div class="flex-shrink-0 w-44 group cursor-pointer">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-sm bg-surface-container">
+<img alt="Product" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_PicF_tBbLieHDahrtxulmctY-KKVQNZtFR3uewqiZVlDqlgYsjtdUJmABUwsNpn53r3vuLWS1sdwg1gzoEBQwdOUDjPgh3NZUyoACBHp9crhhUWz1H2G7JrwGxoF60nL4THvRntWCYi14V762tG0wTIhcA9xJ7DSb9i14hP82olcPcWq0KASOsqsxlLQduFFEWDAsrtVFc3qyRKAWBzzL3VDDEPv3BH3ndyOqQ52ii1r5Wd3JLL9IoOXtyHt2C9ANmFjFaPsmxA"/>
+<div class="absolute top-2 right-2">
+<span class="bg-amber-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">New</span>
+</div>
+</div>
+<div class="flex flex-col gap-0.5">
+<h4 class="font-body-md text-on-surface truncate">Linen Blend Trousers</h4>
+<p class="font-label-lg text-on-surface-variant">$89</p>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="flex-shrink-0 w-44 group cursor-pointer">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-sm bg-surface-container">
+<img alt="Product" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_PicF_tBbLieHDahrtxulmctY-KKVQNZtFR3uewqiZVlDqlgYsjtdUJmABUwsNpn53r3vuLWS1sdwg1gzoEBQwdOUDjPgh3NZUyoACBHp9crhhUWz1H2G7JrwGxoF60nL4THvRntWCYi14V762tG0wTIhcA9xJ7DSb9i14hP82olcPcWq0KASOsqsxlLQduFFEWDAsrtVFc3qyRKAWBzzL3VDDEPv3BH3ndyOqQ52ii1r5Wd3JLL9IoOXtyHt2C9ANmFjFaPsmxA"/>
+</div>
+<div class="flex flex-col gap-0.5">
+<h4 class="font-body-md text-on-surface truncate">Classic Silk Camisole</h4>
+<p class="font-label-lg text-on-surface-variant">$65</p>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="flex-shrink-0 w-44 group cursor-pointer">
+<div class="relative aspect-[3/4] rounded-xl overflow-hidden mb-sm bg-surface-container">
+<img alt="Product" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_PicF_tBbLieHDahrtxulmctY-KKVQNZtFR3uewqiZVlDqlgYsjtdUJmABUwsNpn53r3vuLWS1sdwg1gzoEBQwdOUDjPgh3NZUyoACBHp9crhhUWz1H2G7JrwGxoF60nL4THvRntWCYi14V762tG0wTIhcA9xJ7DSb9i14hP82olcPcWq0KASOsqsxlLQduFFEWDAsrtVFc3qyRKAWBzzL3VDDEPv3BH3ndyOqQ52ii1r5Wd3JLL9IoOXtyHt2C9ANmFjFaPsmxA"/>
+</div>
+<div class="flex flex-col gap-0.5">
+<h4 class="font-body-md text-on-surface truncate">Straw Sun Hat</h4>
+<p class="font-label-lg text-on-surface-variant">$45</p>
+</div>
+</div>
+</div>
+</section></main>
+<div class="fixed bottom-0 left-0 w-full bg-white/90 backdrop-blur-md px-margin-mobile pt-md pb-lg flex gap-md items-center z-50">
+<button class="flex-1 h-14 bg-amber-500 hover:bg-[#C4A137] text-white font-label-lg uppercase tracking-[0.1em] rounded-xl flex items-center justify-center gap-sm active:scale-95 transition-all shadow-md">
+<span class="material-symbols-outlined">shopping_bag</span>
+            Add to Cart
+        </button>
+<button class="w-14 h-14 border border-outline rounded-xl flex items-center justify-center text-on-surface active:scale-95 transition-all">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</body></html>

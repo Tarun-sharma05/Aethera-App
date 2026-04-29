@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aethera | Curated Modern Living</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tap-highlight-transparent {
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            background-color: #fdf8f8;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#46464a",
+                      "on-secondary-fixed-variant": "#484643",
+                      "tertiary-container": "#1f1b1a",
+                      "tertiary-fixed-dim": "#cdc5c3",
+                      "surface-container-lowest": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "surface-tint": "#5f5e60",
+                      "surface-container-low": "#f7f3f2",
+                      "on-secondary": "#ffffff",
+                      "secondary": "#605e5a",
+                      "on-surface": "#1c1b1b",
+                      "surface-container": "#f1edec",
+                      "surface-variant": "#e5e2e1",
+                      "surface-dim": "#ddd9d9",
+                      "on-background": "#1c1b1b",
+                      "primary": "#010102",
+                      "background": "#fdf8f8",
+                      "on-primary-fixed": "#1b1b1d",
+                      "on-primary-fixed-variant": "#474649",
+                      "tertiary-fixed": "#eae0de",
+                      "on-tertiary-container": "#8a8381",
+                      "error-container": "#ffdad6",
+                      "inverse-on-surface": "#f4f0ef",
+                      "surface-container-high": "#ebe7e7",
+                      "secondary-container": "#e6e2dd",
+                      "primary-fixed-dim": "#c8c6c8",
+                      "on-secondary-fixed": "#1d1b19",
+                      "on-tertiary-fixed-variant": "#4b4644",
+                      "surface": "#fdf8f8",
+                      "tertiary": "#010100",
+                      "on-secondary-container": "#666460",
+                      "inverse-primary": "#c8c6c8",
+                      "primary-container": "#1c1c1e",
+                      "outline": "#77767b",
+                      "surface-bright": "#fdf8f8",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-fixed": "#1f1b1a",
+                      "outline-variant": "#c7c6ca",
+                      "on-error": "#ffffff",
+                      "surface-container-highest": "#e5e2e1",
+                      "secondary-fixed": "#e6e2dd",
+                      "secondary-fixed-dim": "#cac6c1",
+                      "primary-fixed": "#e4e2e4",
+                      "on-primary-container": "#858486",
+                      "inverse-surface": "#313030"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "20px",
+                      "gutter": "12px",
+                      "xs": "8px",
+                      "base": "4px",
+                      "lg": "24px",
+                      "md": "16px",
+                      "sm": "12px",
+                      "xl": "32px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "title-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "label-lg": ["Inter"],
+                      "label-md": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "title-lg": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "headline-md": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-lg": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "label-md": ["11px", {"lineHeight": "16px", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-white dark:bg-stone-950 docked full-width top-0 border-b border-stone-100 dark:border-stone-900 z-50 sticky">
+<div class="flex justify-between items-center w-full px-5 h-16">
+<button class="text-stone-900 dark:text-stone-50 hover:opacity-70 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="text-lg font-semibold tracking-[0.2em] uppercase text-stone-900 dark:text-stone-50 font-sans">AETHERA</div>
+<button class="text-stone-900 dark:text-stone-50 hover:opacity-70 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined">favorite</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="max-w-md mx-auto px-margin-mobile pt-md space-y-xl">
+<!-- Search Bar -->
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full h-14 pl-12 pr-4 bg-surface-container-low border border-outline-variant rounded-xl focus:ring-0 focus:border-primary font-body-md text-body-md transition-all outline-none" placeholder="Search curated collection" type="text"/>
+</div>
+<!-- Category Chips -->
+<section class="overflow-x-auto no-scrollbar -mx-margin-mobile px-margin-mobile">
+<div class="flex gap-sm pb-base">
+<button class="px-lg h-10 rounded-full bg-primary text-on-primary font-label-lg text-label-lg whitespace-nowrap active:scale-95 transition-transform">All</button>
+<button class="px-lg h-10 rounded-full bg-surface-container text-on-surface-variant font-label-lg text-label-lg whitespace-nowrap active:scale-95 transition-transform hover:bg-surface-container-high">Clothing</button>
+<button class="px-lg h-10 rounded-full bg-surface-container text-on-surface-variant font-label-lg text-label-lg whitespace-nowrap active:scale-95 transition-transform hover:bg-surface-container-high">Electronics</button>
+<button class="px-lg h-10 rounded-full bg-surface-container text-on-surface-variant font-label-lg text-label-lg whitespace-nowrap active:scale-95 transition-transform hover:bg-surface-container-high">Home</button>
+</div>
+</section>
+<!-- Featured Banner -->
+<section class="relative aspect-[16/9] overflow-hidden rounded-xl shadow-none">
+<img alt="Featured Collection" class="w-full h-full object-cover" data-alt="High-fashion editorial shot of a woman in minimalist linen clothing standing in a sun-drenched architectural space with soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3HsQPhzw7YNCJi9tr5bxJpGCk_SZItEMFhEldHm9x0dz0mahXlfK7sU4_2JdL7jfv2hjZheQ4K1uDOi0v5CnOFfPc0cyEvgqtLYqpPNQWawKBwMXp9cetXkqbIavBhu7zWqOBh_2RCE9dCyld0121dHIMUsIYDmpUrH6ttmGX-0CNA2IrU7uKM8tz-rjVaUDzaVi2cyIqGg9nMEDhhewk2gAUKgEGXKFzB5ED9c7hz8vbD6Rt75of_z0w92rGZ6DNvaL0J7nOvjk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex flex-col justify-end p-lg">
+<span class="font-label-md text-label-md text-white/80 uppercase tracking-widest mb-1">New Season</span>
+<h2 class="font-headline-lg text-headline-lg text-white mb-base">Essential Minimalism</h2>
+</div>
+</section>
+<!-- Trending Section -->
+<section class="space-y-lg">
+<div class="flex justify-between items-end">
+<h3 class="font-title-lg text-title-lg text-on-surface">Trending</h3>
+<a class="font-label-lg text-label-lg text-on-surface-variant border-b border-on-surface-variant/20 pb-0.5" href="#">View all</a>
+</div>
+<!-- 2-Column Product Grid -->
+<div class="grid grid-cols-2 gap-x-sm gap-y-xl">
+<!-- Product Card 1 -->
+<div class="flex flex-col space-y-sm">
+<div class="relative aspect-[3/4] bg-surface-container-low rounded-xl overflow-hidden group">
+<img alt="Wool Coat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close-up of a premium oversized beige wool coat hanging against a clean off-white background with soft editorial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwPoWdUFBYO_CgoRDv9iLJm3tsEv8f-cN61OjPEGP2zrVA3MEUSo1FB9iXKnfIRS7p_TykSFA1r-aN-P2II7Y3CeWs_UHRPIhnMbyFRXmTw_L0vzQ6itQEh6U9D6ABsbo1z3t1uX24rfRJoT-RW8GMyvyhdTEw9CfL123VmsrteasTqQ2D0XdNaD5HX3aNIib4hc9CU6eWGSIFGOpEphioyr9OaQwsDNVaL5ggKeklN8Ttwn_rTWoqrAkiOCyqPjxWm_RsJ_0x3_8"/>
+<button class="absolute top-3 right-3 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-on-surface active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="space-y-0.5">
+<p class="font-body-md text-body-md text-on-surface truncate">Structured Wool Coat</p>
+<p class="font-label-lg text-label-lg text-on-secondary-fixed-variant">$340.00</p>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="flex flex-col space-y-sm">
+<div class="relative aspect-[3/4] bg-surface-container-low rounded-xl overflow-hidden group">
+<img alt="Ceramic Vase" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Minimalist ceramic vase set on a wooden surface with a single branch, soft natural light streaming from a window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqiRucgYK0vGTiLan9P8ThKPHrhZthOpHQVedmSoShUdFuWKQfSpD5hI7YFbsSfRnD2QCq_FUn4dVg7vE6dpx_mJIuQVdlDcuW5ohS8vS_hCwbq7ayedSg8CfUM8Siy719g8mXudTn-uWYMjUCLiuuidsq08FTqExxKrSUxMxrHGPPfcZiqvdmbHPXe4tkYn-KrOhnVXWjfJojRS3YfeXW82OWcIF7rg1l6Irw7WvsBjTf_8LI79TAIiVCrUiKolYIWBTun1x4LWw"/>
+<button class="absolute top-3 right-3 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-on-surface active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="space-y-0.5">
+<p class="font-body-md text-body-md text-on-surface truncate">Artisan Ceramic Vase</p>
+<p class="font-label-lg text-label-lg text-on-secondary-fixed-variant">$85.00</p>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="flex flex-col space-y-sm">
+<div class="relative aspect-[3/4] bg-surface-container-low rounded-xl overflow-hidden group">
+<img alt="Luxury Watch" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Premium silver luxury watch on a clean white surface with sharp shadows and reflective surfaces" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeRk_GDqoV3g79C9OlYuacKHZIBhGxinkBA-qMdsZFvh4OE-bp-25-BXlY4pLmfvsvdhk1RnkaRsGVsdyO_P_SpYrTt8rKnHKonCALKgA5TNOZE-CvhisuNLszWPXmF9Tg8P2_n_cTNx38m7z0BA-cqn6draUVcd2XtOzRLKDMkLAhIkzn3l5yMYHIoZKCO8kZeNliObWL7zenyrKdSA6SnN8AQ7EKnT9CDXy2UmKix-WmpqomxCSamCCKS3jX54z4KTYIqBcWsvA"/>
+<button class="absolute top-3 right-3 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-on-surface active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="space-y-0.5">
+<p class="font-body-md text-body-md text-on-surface truncate">Chrono Silver Edition</p>
+<p class="font-label-lg text-label-lg text-on-secondary-fixed-variant">$520.00</p>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="flex flex-col space-y-sm">
+<div class="relative aspect-[3/4] bg-surface-container-low rounded-xl overflow-hidden group">
+<img alt="Headphones" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern high-fidelity wireless headphones in matte black finish on a dark textured background with dramatic rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv3ARpKQcBJZnh_u9ZRarfa8Nhf875Ow8k4tjXwYkzmp9ZzrQeEC6I5XwfTfnhfie22MQzAQCgvQv0nnfpXBfsEpg07cLVaWMm9iN6qKaHkqZvjCGXAQXQqMjJXhYx_sUeBKPmRtKQCDUYOwULEMRCjxgyDN5fyx8y8toIlnE6F8JObP3Po7bV7LQYqx-E63troXe4o2JmEdiPzXztjEaDKCGnoPq-_8nRxdDKIMAbIJnC0Z29wsqvho-1HkOkDJfI9JQuLMg5JW8"/>
+<button class="absolute top-3 right-3 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-on-surface active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="space-y-0.5">
+<p class="font-body-md text-body-md text-on-surface truncate">Studio Wireless Pro</p>
+<p class="font-label-lg text-label-lg text-on-secondary-fixed-variant">$299.00</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 px-4 pb-safe bg-white dark:bg-stone-950 border-t border-stone-100 dark:border-stone-900 shadow-[0_-4px_20px_0px_rgba(28,28,30,0.04)]">
+<a class="flex flex-col items-center justify-center text-stone-900 dark:text-stone-50 relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-amber-500 after:rounded-full tap-highlight-transparent active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-weight="fill">home</span>
+<span class="font-medium tracking-wide uppercase text-[10px] mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-stone-600 dark:hover:text-stone-300 transition-colors tap-highlight-transparent active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-medium tracking-wide uppercase text-[10px] mt-1">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-stone-600 dark:hover:text-stone-300 transition-colors tap-highlight-transparent active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="font-medium tracking-wide uppercase text-[10px] mt-1">Cart</span>
+</a>
+<a class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-600 hover:text-stone-600 dark:hover:text-stone-300 transition-colors tap-highlight-transparent active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-medium tracking-wide uppercase text-[10px] mt-1">Profile</span>
+</a>
+</nav>
+</body></html>
