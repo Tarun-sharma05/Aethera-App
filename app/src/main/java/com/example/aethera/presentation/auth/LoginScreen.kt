@@ -45,6 +45,7 @@ fun LoginScreen(
 }
 
 // ── Content (pure UI, @Preview-able) ─────────────────────────
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginContent(
     isLoading          : Boolean,

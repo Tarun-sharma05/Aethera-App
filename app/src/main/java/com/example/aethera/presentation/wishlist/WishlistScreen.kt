@@ -3,6 +3,7 @@ package com.example.aethera.presentation.wishlist
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material3.*
@@ -13,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.example.aethera.presentation.home.ProductCard
 import org.koin.androidx.compose.koinViewModel
 
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WishlistScreen(
     innerPadding   : PaddingValues,

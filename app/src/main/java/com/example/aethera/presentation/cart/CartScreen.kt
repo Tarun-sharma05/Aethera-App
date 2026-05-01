@@ -25,6 +25,7 @@ import com.example.aethera.ui.theme.AmberGold
 import org.koin.androidx.compose.koinViewModel
 
 // ── Parent ──────────────────────────────────────────────────
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartScreen(
     innerPadding   : PaddingValues,

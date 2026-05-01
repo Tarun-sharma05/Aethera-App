@@ -1,5 +1,6 @@
 package com.example.aethera.presentation.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.aethera.common.ResultState
@@ -36,39 +37,71 @@ class HomeViewModel(
     }
 
     private fun loadCategories() {
+        Log.d(TAG, "loadCategories() → started")
         productRepository.getCategories().onEach { result ->
             when (result) {
-                is ResultState.Loading -> { /* categories load silently */ }
-                is ResultState.Success -> _uiState.value = _uiState.value.copy(categories = result.data)
-                is ResultState.Error   -> _uiState.value = _uiState.value.copy(error = result.error)
+                is ResultState.Loading -> Log.d(TAG, "loadCategories() → Loading")
+                is ResultState.Success -> {
+                    Log.d(TAG, "loadCategories() → Success: ${result.data.size} category/ies received")
+                    _uiState.value = _uiState.value.copy(categories = result.data)
+                }
+                is ResultState.Error -> {
+                    Log.e(TAG, "loadCategories() → Error: ${result.error}")
+                    _uiState.value = _uiState.value.copy(error = result.error)
+                }
             }
         }.launchIn(viewModelScope)
     }
 
     fun loadProducts() {
+        Log.d(TAG, "loadProducts() → started")
         productRepository.getProducts().onEach { result ->
             when (result) {
-                is ResultState.Loading -> _uiState.value = _uiState.value.copy(isLoading = true)
-                is ResultState.Success -> _uiState.value = _uiState.value.copy(isLoading = false, products = result.data)
-                is ResultState.Error   -> _uiState.value = _uiState.value.copy(isLoading = false, error = result.error)
+                is ResultState.Loading -> {
+                    Log.d(TAG, "loadProducts() → Loading")
+                    _uiState.value = _uiState.value.copy(isLoading = true)
+                }
+                is ResultState.Success -> {
+                    Log.d(TAG, "loadProducts() → Success: ${result.data.size} product(s) received")
+                    _uiState.value = _uiState.value.copy(isLoading = false, products = result.data)
+                }
+                is ResultState.Error -> {
+                    Log.e(TAG, "loadProducts() → Error: ${result.error}")
+                    _uiState.value = _uiState.value.copy(isLoading = false, error = result.error)
+                }
             }
         }.launchIn(viewModelScope)
     }
 
     fun selectCategory(category: String) {
+        Log.d(TAG, "selectCategory() → selected='$category'")
         _uiState.value = _uiState.value.copy(selectedCategory = category)
         if (category == "All") {
             loadProducts()
         } else {
+            Log.d(TAG, "selectCategory() → fetching products for category='$category'")
             productRepository.getProductsByCategory(category).onEach { result ->
                 when (result) {
-                    is ResultState.Loading -> _uiState.value = _uiState.value.copy(isLoading = true)
-                    is ResultState.Success -> _uiState.value = _uiState.value.copy(isLoading = false, products = result.data)
-                    is ResultState.Error   -> _uiState.value = _uiState.value.copy(isLoading = false, error = result.error)
+                    is ResultState.Loading -> {
+                        Log.d(TAG, "selectCategory() → Loading products for '$category'")
+                        _uiState.value = _uiState.value.copy(isLoading = true)
+                    }
+                    is ResultState.Success -> {
+                        Log.d(TAG, "selectCategory() → Success: ${result.data.size} product(s) for '$category'")
+                        _uiState.value = _uiState.value.copy(isLoading = false, products = result.data)
+                    }
+                    is ResultState.Error -> {
+                        Log.e(TAG, "selectCategory() → Error for '$category': ${result.error}")
+                        _uiState.value = _uiState.value.copy(isLoading = false, error = result.error)
+                    }
                 }
             }.launchIn(viewModelScope)
         }
     }
 
     fun clearError() { _uiState.value = _uiState.value.copy(error = null) }
+
+    companion object {
+        private const val TAG = "HomeViewModel"
+    }
 }
