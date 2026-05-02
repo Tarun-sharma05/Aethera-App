@@ -18,66 +18,83 @@ Aethera follows the **Stitch Indigo** design system, utilizing Material 3 to cre
 
 ---
 
+## 🚀 Key Features
+
+- **Real-time Sync:** Powered by Firestore `snapshotListener`, ensuring product prices, availability, and categories are always up-to-date without manual refreshes.
+- **Advanced Navigation:** Built with **Navigation 3**, utilizing polymorphic `@Serializable` routes for type-safe navigation and state preservation.
+- **Secure Authentication:** Complete Email/Password authentication flow with persistent login sessions and user profile management.
+- **Smart Cart & Wishlist:** Automated management of user-specific sub-collections with optimistic UI updates for a snappy experience.
+- **Detailed Checkout:** A structured checkout process that generates unique order IDs and tracks order history in real-time.
+- **Product Discovery:** Category-based filtering and instant client-side search across the product catalog.
+
+---
+
 ## 🛠 Tech Stack & Tools
 
 - **UI Framework:** [Jetpack Compose](https://developer.android.com/jetpack/compose) with Material 3.
-- **Architecture:** MVVM + Clean Architecture (Feature-based partitioning).
-- **Dependency Injection:** [Koin 4.0](https://insert-koin.io/) — A pragmatic, lightweight DI framework.
-- **Navigation:** [Navigation 3](https://developer.android.com/guide/navigation/navigation-3) — Utilizing type-safe `@Serializable` routes and polymorphic navigation graphs.
-- **Backend:** [Firebase](https://firebase.google.com/) (Firestore for real-time data, Auth for user management, Storage for media).
-- **Image Loading:** [Coil 3](https://coil-kt.github.io/coil/) — Modern image loading powered by Coroutines.
-- **Serialization:** [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization) for type-safe routing.
-- **Concurrency:** Kotlin Coroutines & StateFlow.
+- **Architecture:** MVVM + Clean Architecture with Feature-based partitioning.
+- **Dependency Injection:** [Koin 4.0](https://insert-koin.io/) — Managed via `AppModule.kt` for repositories and ViewModels.
+- **Navigation:** [Navigation 3](https://developer.android.com/guide/navigation/navigation-3) — High-level, type-safe navigation with `rememberNavBackStack`.
+- **Backend:** [Firebase](https://firebase.google.com/) (Firestore, Auth, Storage).
+- **Image Loading:** [Coil 3](https://coil-kt.github.io/coil/) — For efficient, coroutine-powered image rendering.
+- **Serialization:** [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization) for route definitions.
+- **Concurrency:** Kotlin Coroutines & StateFlow for reactive data streams.
 
 ---
 
 ## 🏗 Holistic Architecture
 
-The project is structured following **Clean Architecture** principles to ensure strict separation of concerns and maximum testability.
+The project adheres to **Clean Architecture** principles, ensuring a decoupled and testable codebase.
 
 ### 1. Domain Layer (Pure Kotlin)
-Contains the core business logic, entities, and repository interfaces. It is independent of any Android or Firebase dependencies.
-- **Models:** `Product`, `Category`, `CartItem`, `Order`, `User`.
-- **Repositories:** Defined as interfaces to allow for easy mocking and swapping of data sources.
+Contains the core business logic and entities.
+- **Entities:** `Product`, `Category`, `CartItem`, `Order`, `User`.
+- **Repository Interfaces:** Defining the contract for data operations.
 
 ### 2. Data Layer
-The implementation of the domain repository interfaces.
-- **Firestore Integration:** Uses `snapshotListener` for real-time UI updates. When an admin changes a price or adds stock, the user sees it instantly.
-- **Koin Modules:** The `AppModule.kt` manages all singleton repository bindings and ViewModel factory injections.
+Handles all external data interactions.
+- **Firestore Repositories:** Implements real-time data fetching using Kotlin Coroutines `callbackFlow`.
+- **ResultState Wrapper:** A sealed class pattern (`Loading`, `Success`, `Error`) used across the app for consistent state handling.
 
 ### 3. Presentation Layer (Compose)
-A reactive UI layer driven by `StateFlow`.
-- **ViewModel:** Each screen has a dedicated ViewModel that manages UI state via a single `uiState` flow.
-- **Navigation 3:** Implements a polymorphic `AetheraNavGraph` that handles complex deep-linking and state preservation using a custom `SavedStateConfiguration`.
-- **Parent/Content Pattern:** Every screen is split into a **Parent Composable** (handles DI and logic) and a **Content Composable** (purely UI), ensuring screens are previewable and loosely coupled.
+A fully reactive UI layer.
+- **Parent/Content Pattern:** Decouples Logic/DI from UI components, making Composables easily previewable.
+- **Navigation 3 Graph:** A polymorphic graph implementation in `AetheraNavGraph.kt` handling complex transitions and bottom bar logic.
 
 ---
 
-## 🚀 Key Features
+## ⚙️ Getting Started
 
-- **Real-time Sync:** Real-time updates for products and categories directly from Firestore.
-- **Smart Cart Management:** Automated sub-collection management for user carts with optimistic UI updates.
-- **Type-Safe Navigation:** No more string-based routes; everything is handled via `@Serializable` data classes.
-- **Secure Checkout:** Lightweight checkout process writing directly to a centralized `ORDERS` collection for admin fulfillment.
-- **Wishlist & Search:** Instant client-side search filtering and persistent wishlist tracking.
+To run this project, you need to set up a Firebase project:
+
+1.  Create a project on the [Firebase Console](https://console.firebase.google.com/).
+2.  Add an Android App with the package name `com.example.aethera`.
+3.  Download the `google-services.json` and place it in the `app/` directory.
+4.  Enable **Email/Password** Authentication.
+5.  Create a **Firestore Database** and set up the following collections: `CATEGORY`, `PRODUCTS`, `USERS`, `CART`, `ORDERS`, `WISHLIST`.
+6.  (Optional) Add sample data to `PRODUCTS` and `CATEGORY` collections to see them in the app.
 
 ---
 
 ## 📁 Project Structure
 
 ```text
-app/
-├── common/             # Constants and ResultState wrappers
+app/src/main/java/com/example/aethera/
+├── common/             # Constants, ResultState, and Utility classes
 ├── data/
-│   ├── di/             # Koin Modules
-│   └── repository/     # Firestore Implementations
+│   ├── di/             # Koin Modules (AppModule)
+│   └── repository/     # Firestore & Auth Implementations
 ├── domain/
-│   ├── models/         # Business Entities
+│   ├── models/         # Business Entities (Product, Order, etc.)
 │   └── repository/     # Interface Definitions
-├── presentation/       # Feature-based UI (Home, Cart, Product, etc.)
-│   ├── navigation/     # NavGraph and Nav3 Setup
-│   └── theme/          # Stitch Design Tokens (M3)
-└── BaseApplication     # Koin Initialization
+├── presentation/       # Feature-based UI
+│   ├── auth/           # Login & Signup screens
+│   ├── home/           # Home & Category browsing
+│   ├── cart/           # Cart management
+│   ├── checkout/       # Order placement flow
+│   ├── navigation/     # NavGraph and Route definitions
+│   └── theme/          # Stitch Indigo Design Tokens (M3)
+└── BaseApplication     # Koin & Global Initialization
 ```
 
 ---
