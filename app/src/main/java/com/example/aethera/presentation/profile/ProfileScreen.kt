@@ -1,14 +1,19 @@
 package com.example.aethera.presentation.profile
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,6 +50,18 @@ fun ProfileScreen(
             CircularProgressIndicator()
         }
 
+        Row(){
+            InfoBox(title = "ORDERS", value = "2", modifier= Modifier.weight(1f))
+              Spacer(modifier = Modifier.width(12.dp))
+
+            InfoBox(title = "SAVES", value = "2", modifier= Modifier.weight(1f))
+            Spacer(modifier = Modifier.width(12.dp))
+
+            InfoBox(title = "POINTS", value = "2.5K", modifier= Modifier.weight(1f))
+        }
+
+
+
         Spacer(Modifier.height(16.dp))
 
         OutlinedButton(onClick = onOrderHistory, modifier = Modifier.fillMaxWidth().height(52.dp), shape = MaterialTheme.shapes.medium) {
@@ -66,3 +83,36 @@ fun ProfileScreen(
         }
     }
 }
+
+
+@Composable
+fun InfoBox(title: String, value: String, modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier
+            .height(90.dp)
+            .background(Color.White, shape = RoundedCornerShape(8.dp))
+//            .border(1.dp, Color.Black, RoundedCornerShape(8.dp)) // Added border for visibility
+            .padding(15.dp)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = title,
+                color = Color.DarkGray,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+            Text(
+                text = value,
+                color = Color.Black,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+        }
+    }
+}
+
