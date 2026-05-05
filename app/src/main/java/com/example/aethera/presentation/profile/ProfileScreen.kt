@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ShoppingBag
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -64,13 +65,52 @@ fun ProfileScreen(
 
         Spacer(Modifier.height(16.dp))
 
-        OutlinedButton(onClick = onOrderHistory, modifier = Modifier.fillMaxWidth().height(52.dp), shape = MaterialTheme.shapes.medium) {
-            Text("My Orders", style = MaterialTheme.typography.labelLarge)
+        Button(
+            onClick = onOrderHistory,
+            modifier = Modifier.fillMaxWidth().height(52.dp),
+            shape = MaterialTheme.shapes.medium,
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
+        ) {
+            Text("My Orders", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
         }
-        OutlinedButton(onClick = onWishlist, modifier = Modifier.fillMaxWidth().height(52.dp), shape = MaterialTheme.shapes.medium) {
-            Text("Wishlist", style = MaterialTheme.typography.labelLarge)
-        }
+        Button(
 
+            onClick = onWishlist,
+            modifier = Modifier.fillMaxWidth().height(52.dp),
+            shape = MaterialTheme.shapes.medium,
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
+        ) {
+            Icon(
+                imageVector = Icons.Filled.ShoppingBag,
+                contentDescription = null,
+            )
+            Spacer(modifier = Modifier.padding(start = 4.dp, end = 16.dp))
+            Text("Wishlist", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
+        }
+        Button(
+            onClick = onWishlist,
+            modifier = Modifier.fillMaxWidth().height(52.dp),
+            shape = MaterialTheme.shapes.medium,
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
+        ) {
+            Text("Shipping Addresses", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
+        }
+        Button(
+            onClick = onWishlist,
+            modifier = Modifier.fillMaxWidth().height(52.dp),
+            shape = MaterialTheme.shapes.medium,
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
+        ) {
+            Text("Payment Methods", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
+        }
+        Button(
+            onClick = onWishlist,
+            modifier = Modifier.fillMaxWidth().height(52.dp),
+            shape = MaterialTheme.shapes.medium,
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
+        ) {
+            Text("Settings", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
+        }
         Spacer(Modifier.weight(1f))
 
         Button(
