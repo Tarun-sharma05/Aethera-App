@@ -5,6 +5,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Payments
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ShoppingBag
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.*
@@ -93,6 +96,12 @@ fun ProfileScreen(
             shape = MaterialTheme.shapes.medium,
             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
         ) {
+
+            Icon(
+                imageVector = Icons.Default.LocationOn,
+                contentDescription = null,
+                modifier = Modifier.size(24.dp)
+            )
             Text("Shipping Addresses", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
         }
         Button(
@@ -101,6 +110,12 @@ fun ProfileScreen(
             shape = MaterialTheme.shapes.medium,
             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
         ) {
+
+            Icon(
+                imageVector = Icons.Default.Payments,
+                contentDescription = null,
+                modifier = Modifier.size(24.dp)
+            )
             Text("Payment Methods", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
         }
         Button(
@@ -109,6 +124,12 @@ fun ProfileScreen(
             shape = MaterialTheme.shapes.medium,
             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
         ) {
+            Icon(
+                imageVector = Icons.Default.Settings,
+                contentDescription = null,
+                modifier = Modifier.size(24.dp)
+            )
+
             Text("Settings", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
         }
         Spacer(Modifier.weight(1f))
@@ -119,6 +140,7 @@ fun ProfileScreen(
             shape    = MaterialTheme.shapes.medium,
             colors   = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
         ) {
+
             Text("Sign Out", style = MaterialTheme.typography.labelLarge)
         }
     }
