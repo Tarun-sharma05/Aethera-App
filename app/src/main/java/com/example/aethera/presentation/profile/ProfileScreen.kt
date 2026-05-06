@@ -1,20 +1,18 @@
 package com.example.aethera.presentation.profile
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Payments
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.ShoppingBag
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -65,73 +63,116 @@ fun ProfileScreen(
         }
 
 
-
         Spacer(Modifier.height(16.dp))
 
-        Button(
+//        Button(
+//            onClick = onOrderHistory,
+//            modifier = Modifier.fillMaxWidth().height(52.dp),
+//            shape = MaterialTheme.shapes.medium,
+//            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
+//        ) {
+//
+//            Icon(
+//                imageVector = Icons.Filled.ShoppingCart,
+//                contentDescription = null,
+//                modifier = Modifier.size(24.dp)
+//            )
+//            Text("My Orders", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
+//        }
+//        Button(
+//
+//            onClick = onWishlist,
+//            modifier = Modifier.fillMaxWidth().height(52.dp),
+//            shape = MaterialTheme.shapes.medium,
+//            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
+//        ) {
+//            Icon(
+//                imageVector = Icons.Filled.ShoppingBag,
+//                contentDescription = null,
+//            )
+//            Spacer(modifier = Modifier.padding(start = 4.dp, end = 16.dp))
+//            Text("Wishlist", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
+//        }
+//        Button(
+//            onClick = onWishlist,
+//            modifier = Modifier.fillMaxWidth().height(52.dp),
+//            shape = MaterialTheme.shapes.medium,
+//            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
+//        ) {
+//
+//            Icon(
+//                imageVector = Icons.Default.LocationOn,
+//                contentDescription = null,
+//                modifier = Modifier.size(24.dp)
+//            )
+//            Spacer(modifier = Modifier.width(8.dp))
+//            Text("Shipping Addresses", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
+//        }
+//        Button(
+//            onClick = onWishlist,
+//            modifier = Modifier.fillMaxWidth().height(52.dp),
+//            shape = MaterialTheme.shapes.medium,
+//            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
+//        ) {
+//            Icon(
+//                imageVector = Icons.Default.Payments,
+//                contentDescription = null,
+//                modifier = Modifier.size(24.dp)
+//            )
+//
+//            Spacer(modifier = Modifier.width(8.dp) )
+//            Text("Payment Methods", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
+//        }
+//        Button(
+//            onClick = onWishlist,
+//            modifier = Modifier.fillMaxWidth().height(52.dp),
+//            shape = MaterialTheme.shapes.medium,
+//            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
+//        ) {
+//            Icon(
+//                imageVector = Icons.Default.Settings,
+//                contentDescription = null,
+//                modifier = Modifier.size(24.dp)
+//            )
+//
+//            Spacer(modifier = Modifier.width(8.dp))
+//            Text("Settings", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
+//        }
+
+
+         MenuColumnBox(
+             onClick = onOrderHistory,
+             title = "My Orders",
+             Icons.Default.ShoppingCart,
+             trailingIcon = Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null),
+         )
+        MenuColumnBox(
+            onClick = onWishlist,
+            title = "Wishlist",
+            Icons.Default.ShoppingCart,
+            trailingIcon = Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null),
+        )
+        MenuColumnBox(
             onClick = onOrderHistory,
-            modifier = Modifier.fillMaxWidth().height(52.dp),
-            shape = MaterialTheme.shapes.medium,
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
-        ) {
-            Text("My Orders", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-        }
-        Button(
+            title = "Shipping Addresses",
+            Icons.Default.ShoppingCart,
+            trailingIcon = Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null),
+        )
+        MenuColumnBox(
+            onClick = onOrderHistory,
+            title = "Payment Methods",
+            Icons.Default.ShoppingCart,
+            trailingIcon = Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null),
+        )
+        MenuColumnBox(
+            onClick = onOrderHistory,
+            title = "Settings",
+            Icons.Default.ShoppingCart,
+            trailingIcon = Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null),
+        )
 
-            onClick = onWishlist,
-            modifier = Modifier.fillMaxWidth().height(52.dp),
-            shape = MaterialTheme.shapes.medium,
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
-        ) {
-            Icon(
-                imageVector = Icons.Filled.ShoppingBag,
-                contentDescription = null,
-            )
-            Spacer(modifier = Modifier.padding(start = 4.dp, end = 16.dp))
-            Text("Wishlist", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
-        }
-        Button(
-            onClick = onWishlist,
-            modifier = Modifier.fillMaxWidth().height(52.dp),
-            shape = MaterialTheme.shapes.medium,
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
-        ) {
 
-            Icon(
-                imageVector = Icons.Default.LocationOn,
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
-            )
-            Text("Shipping Addresses", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
-        }
-        Button(
-            onClick = onWishlist,
-            modifier = Modifier.fillMaxWidth().height(52.dp),
-            shape = MaterialTheme.shapes.medium,
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
-        ) {
 
-            Icon(
-                imageVector = Icons.Default.Payments,
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
-            )
-            Text("Payment Methods", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
-        }
-        Button(
-            onClick = onWishlist,
-            modifier = Modifier.fillMaxWidth().height(52.dp),
-            shape = MaterialTheme.shapes.medium,
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Settings,
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
-            )
-
-            Text("Settings", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
-        }
         Spacer(Modifier.weight(1f))
 
         Button(
@@ -174,6 +215,39 @@ fun InfoBox(title: String, value: String, modifier: Modifier = Modifier) {
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
+        }
+    }
+}
+
+
+@Composable
+fun MenuColumnBox(
+    onClick: () -> Unit,
+    title: String,
+    icon: ImageVector,
+    trailingIcon: Unit, modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .height(90.dp)
+            .background(Color.White, shape = RoundedCornerShape(8.dp))
+//            .border(1.dp, Color.Black, RoundedCornerShape(8.dp)) // Added border for visibility
+            .padding(15.dp)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(imageVector = icon, contentDescription = null)
+
+            Text(
+                text = title,
+                color = Color.DarkGray,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+
         }
     }
 }
