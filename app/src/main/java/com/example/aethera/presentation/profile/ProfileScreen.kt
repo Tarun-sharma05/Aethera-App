@@ -1,21 +1,33 @@
 package com.example.aethera.presentation.profile
 
+import android.R.attr.bottom
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.*
+import androidx.compose.material3.OutlinedTextFieldDefaults.contentPadding
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -28,162 +40,190 @@ fun ProfileScreen(
     viewModel      : ProfileViewModel = koinViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
+//
+//    LaunchedEffect(uiState.isLoggedOut) {
+//        if (uiState.isLoggedOut) onLogout()
+//    }
+//
+//    val user = uiState.user
+//
 
-    LaunchedEffect(uiState.isLoggedOut) {
-        if (uiState.isLoggedOut) onLogout()
+
+       ProfileContent(
+           state = uiState,
+           innerPadding =  innerPadding,
+           onOrderHistory = onOrderHistory,
+           onWishlist = onWishlist,
+           onLogout = onLogout,
+           viewModel = viewModel,
+
+       )
+
+
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ProfileContent(
+state: ProfileUiState,
+innerPadding   : PaddingValues,
+onOrderHistory : () -> Unit,
+onWishlist     : () -> Unit,
+onLogout       : () -> Unit,
+viewModel: ProfileViewModel = koinViewModel()
+){
+//    val uiState by viewModel.uiState.collectAsState()
+//
+//    LaunchedEffect(uiState.isLoggedOut) {
+//        if (uiState.isLoggedOut) onLogout()
+//    }
+//
+//    val user = state.user
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = {}) {
+                        Icon(Icons.Filled.Menu, "Drop Down menu")
+                    }
+                },
+                title = {
+                    Text(
+                        "Aethera",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black,
+                    )
+                },
+                actions = {
+                    IconButton(onClick = { /* Settings */ }) {
+                        Icon(Icons.Filled.FavoriteBorder, contentDescription = "Heart icon")
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.onPrimary)
+            )
+        }
+    ) { scaffoldPadding ->
+        if (state.isLoading) {
+            Box(
+                modifier = Modifier.fillMaxSize().padding(scaffoldPadding),
+                contentAlignment = Alignment.Center
+            ) { CircularProgressIndicator() }
+            return@Scaffold
+        }
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(scaffoldPadding)
+                .padding(bottom = innerPadding.calculateBottomPadding()),
+            contentPadding = PaddingValues(horizontal = 20.dp, vertical = 12.dp),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            item {
+//                Spacer(Modifier.height(8.dp))
+                Personal_Info(state = state)
+
+            }
+
+
+
+            item {
+                Spacer(Modifier.padding(12.dp))
+                Row{
+                    InfoBox(title = "ORDERS", value = "2", modifier= Modifier.weight(1f))
+                    Spacer(modifier = Modifier.width(12.dp))
+
+                    InfoBox(title = "SAVES", value = "2", modifier= Modifier.weight(1f))
+                    Spacer(modifier = Modifier.width(12.dp))
+
+                    InfoBox(title = "POINTS", value = "2.5K", modifier= Modifier.weight(1f))
+                }
+            }
+
+            item {
+                Spacer(Modifier.padding(12.dp))
+                MenuColumnBox(
+                    onClick = onOrderHistory,
+                    title = "My Orders",
+                    Icons.Default.ShoppingCart,
+                    Icons.AutoMirrored.Filled.KeyboardArrowRight
+                )
+                MenuColumnBox(
+                    onClick = onWishlist,
+                    title = "Wishlist",
+                    Icons.Default.ShoppingCart,
+                    Icons.AutoMirrored.Filled.KeyboardArrowRight
+                )
+                MenuColumnBox(
+                    onClick = onOrderHistory,
+                    title = "Shipping Addresses",
+                    Icons.Default.ShoppingCart,
+                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                )
+                MenuColumnBox(
+                    onClick = onOrderHistory,
+                    title = "Payment Methods",
+                    Icons.Default.ShoppingCart,
+                    Icons.AutoMirrored.Filled.KeyboardArrowRight
+                )
+                MenuColumnBox(
+                    onClick = onOrderHistory,
+                    title = "Settings",
+                    Icons.Default.ShoppingCart,
+                    Icons.AutoMirrored.Filled.KeyboardArrowRight
+                )
+            }
+
+            item {
+                Spacer(Modifier.padding(16.dp))
+                Button(
+                    onClick  = viewModel::logout,
+                    modifier = Modifier.fillMaxWidth().height(52.dp),
+                    shape    = MaterialTheme.shapes.medium,
+                    colors   = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
+                ) {
+                    Text("Sign Out", style = MaterialTheme.typography.labelLarge)
+                }
+            }
+
+
+        }
+
+
     }
+}
 
-    val user = uiState.user
-
+@Composable
+fun Personal_Info(state: ProfileUiState){
     Column(
-        modifier = Modifier.fillMaxSize().padding(innerPadding).padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TopAppBar(title = { Text("Profile", style = MaterialTheme.typography.titleLarge) })
+        Icon(
+            Icons.Outlined.Person,
+            contentDescription = null,
+            modifier = Modifier.size(72.dp),
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
+        )
 
-        Spacer(Modifier.height(8.dp))
-        Icon(Icons.Outlined.Person, contentDescription = null, modifier = Modifier.size(72.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
-
-        if (user != null) {
-            Text(user.name, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.SemiBold)
-            Text(user.email, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        } else if (uiState.isLoading) {
+        if (state.user != null) {
+            Text(
+                state.user.name,
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.SemiBold
+            )
+            Text(
+                state.user.email,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        } else if (state.isLoading) {
             CircularProgressIndicator()
         }
 
-        Row(){
-            InfoBox(title = "ORDERS", value = "2", modifier= Modifier.weight(1f))
-              Spacer(modifier = Modifier.width(12.dp))
-
-            InfoBox(title = "SAVES", value = "2", modifier= Modifier.weight(1f))
-            Spacer(modifier = Modifier.width(12.dp))
-
-            InfoBox(title = "POINTS", value = "2.5K", modifier= Modifier.weight(1f))
-        }
-
-
-        Spacer(Modifier.height(16.dp))
-
-//        Button(
-//            onClick = onOrderHistory,
-//            modifier = Modifier.fillMaxWidth().height(52.dp),
-//            shape = MaterialTheme.shapes.medium,
-//            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
-//        ) {
-//
-//            Icon(
-//                imageVector = Icons.Filled.ShoppingCart,
-//                contentDescription = null,
-//                modifier = Modifier.size(24.dp)
-//            )
-//            Text("My Orders", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-//        }
-//        Button(
-//
-//            onClick = onWishlist,
-//            modifier = Modifier.fillMaxWidth().height(52.dp),
-//            shape = MaterialTheme.shapes.medium,
-//            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
-//        ) {
-//            Icon(
-//                imageVector = Icons.Filled.ShoppingBag,
-//                contentDescription = null,
-//            )
-//            Spacer(modifier = Modifier.padding(start = 4.dp, end = 16.dp))
-//            Text("Wishlist", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
-//        }
-//        Button(
-//            onClick = onWishlist,
-//            modifier = Modifier.fillMaxWidth().height(52.dp),
-//            shape = MaterialTheme.shapes.medium,
-//            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
-//        ) {
-//
-//            Icon(
-//                imageVector = Icons.Default.LocationOn,
-//                contentDescription = null,
-//                modifier = Modifier.size(24.dp)
-//            )
-//            Spacer(modifier = Modifier.width(8.dp))
-//            Text("Shipping Addresses", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
-//        }
-//        Button(
-//            onClick = onWishlist,
-//            modifier = Modifier.fillMaxWidth().height(52.dp),
-//            shape = MaterialTheme.shapes.medium,
-//            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
-//        ) {
-//            Icon(
-//                imageVector = Icons.Default.Payments,
-//                contentDescription = null,
-//                modifier = Modifier.size(24.dp)
-//            )
-//
-//            Spacer(modifier = Modifier.width(8.dp) )
-//            Text("Payment Methods", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
-//        }
-//        Button(
-//            onClick = onWishlist,
-//            modifier = Modifier.fillMaxWidth().height(52.dp),
-//            shape = MaterialTheme.shapes.medium,
-//            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary)
-//        ) {
-//            Icon(
-//                imageVector = Icons.Default.Settings,
-//                contentDescription = null,
-//                modifier = Modifier.size(24.dp)
-//            )
-//
-//            Spacer(modifier = Modifier.width(8.dp))
-//            Text("Settings", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary )
-//        }
-
-
-         MenuColumnBox(
-             onClick = onOrderHistory,
-             title = "My Orders",
-             Icons.Default.ShoppingCart,
-             trailingIcon = Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null),
-         )
-        MenuColumnBox(
-            onClick = onWishlist,
-            title = "Wishlist",
-            Icons.Default.ShoppingCart,
-            trailingIcon = Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null),
-        )
-        MenuColumnBox(
-            onClick = onOrderHistory,
-            title = "Shipping Addresses",
-            Icons.Default.ShoppingCart,
-            trailingIcon = Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null),
-        )
-        MenuColumnBox(
-            onClick = onOrderHistory,
-            title = "Payment Methods",
-            Icons.Default.ShoppingCart,
-            trailingIcon = Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null),
-        )
-        MenuColumnBox(
-            onClick = onOrderHistory,
-            title = "Settings",
-            Icons.Default.ShoppingCart,
-            trailingIcon = Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight, contentDescription = null),
-        )
-
-
-
-        Spacer(Modifier.weight(1f))
-
-        Button(
-            onClick  = viewModel::logout,
-            modifier = Modifier.fillMaxWidth().height(52.dp),
-            shape    = MaterialTheme.shapes.medium,
-            colors   = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
-        ) {
-
-            Text("Sign Out", style = MaterialTheme.typography.labelLarge)
-        }
     }
 }
 
@@ -225,30 +265,43 @@ fun MenuColumnBox(
     onClick: () -> Unit,
     title: String,
     icon: ImageVector,
-    trailingIcon: Unit, modifier: Modifier = Modifier
+    trailingIcon: ImageVector, modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier = modifier
-            .height(90.dp)
-            .background(Color.White, shape = RoundedCornerShape(8.dp))
-//            .border(1.dp, Color.Black, RoundedCornerShape(8.dp)) // Added border for visibility
-            .padding(15.dp)
+//    Box(
+//        modifier = modifier
+//            .height(90.dp)
+//            .background(Color.White, shape = RoundedCornerShape(8.dp))
+////            .border(1.dp, Color.Black, RoundedCornerShape(8.dp)) // Added border for visibility
+////            .padding(15.dp)
+//    ) {
+    TextButton(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth().height(60.dp),
+        colors = ButtonDefaults.textButtonColors(
+            containerColor = Color.White, // White background
+            contentColor = Color.Black // Text/Icon color
+        ),
+        shape = androidx.compose.foundation.shape.RoundedCornerShape(8.dp) // No border/rounded corners
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.SpaceBetween,
-            horizontalAlignment = Alignment.CenterHorizontally
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Icon(imageVector = icon, contentDescription = null)
+            Spacer(Modifier.width(0.dp))
+            Icon(imageVector = icon, contentDescription = null,  modifier = Modifier.padding(start = 12.dp))
 
             Text(
                 text = title,
                 color = Color.DarkGray,
                 fontSize = 14.sp,
-                fontWeight = FontWeight.SemiBold
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.weight(1f),
+                textAlign = TextAlign.Center
             )
-
+             Spacer(Modifier.padding(start = 24.dp, end = 0.dp))
+            Icon(imageVector = trailingIcon, contentDescription = null,   modifier = Modifier.padding(end = 12.dp))
         }
     }
+//    }
 }
 
