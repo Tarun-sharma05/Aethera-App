@@ -277,6 +277,7 @@ fun MenuColumnBox(
     TextButton(
         onClick = onClick,
         modifier = Modifier.fillMaxWidth().height(60.dp),
+        contentPadding = PaddingValues(0.dp),
         colors = ButtonDefaults.textButtonColors(
             containerColor = Color.White, // White background
             contentColor = Color.Black // Text/Icon color
