@@ -10,7 +10,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Payment
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Settings
@@ -153,19 +155,19 @@ viewModel: ProfileViewModel = koinViewModel()
                 MenuColumnBox(
                     onClick = onWishlist,
                     title = "Wishlist",
-                    Icons.Default.ShoppingCart,
+                    Icons.Filled.FavoriteBorder,
                     Icons.AutoMirrored.Filled.KeyboardArrowRight
                 )
                 MenuColumnBox(
                     onClick = onOrderHistory,
                     title = "Shipping Addresses",
-                    Icons.Default.ShoppingCart,
+                    Icons.Filled.LocationOn,
                     Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 )
                 MenuColumnBox(
                     onClick = onOrderHistory,
                     title = "Payment Methods",
-                    Icons.Default.ShoppingCart,
+                    Icons.Default.Payment,
                     Icons.AutoMirrored.Filled.KeyboardArrowRight
                 )
                 MenuColumnBox(
@@ -198,7 +200,7 @@ viewModel: ProfileViewModel = koinViewModel()
 @Composable
 fun Personal_Info(state: ProfileUiState){
     Column(
-
+        modifier = Modifier.height(60.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
