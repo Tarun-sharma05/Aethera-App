@@ -36,6 +36,11 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import org.koin.androidx.compose.koinViewModel
 
+/**
+ * Main entry point for the Profile Screen.
+ * Responsible for collecting state from the ViewModel and passing down UI events.
+ * It delegates the actual rendering to the stateless [ProfileContent] component.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
@@ -68,6 +73,11 @@ fun ProfileScreen(
 
 }
 
+/**
+ * Displays the main UI of the profile screen.
+ * Wrapped in a Scaffold for consistent TopAppBar layout and
+ * uses a LazyColumn to handle scrollable profile content smoothly.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileContent(
@@ -110,6 +120,7 @@ viewModel: ProfileViewModel = koinViewModel()
             )
         }
     ) { scaffoldPadding ->
+        // Display loading indicator centered on screen if data is still fetching
         if (state.isLoading) {
             Box(
                 modifier = Modifier.fillMaxSize().padding(scaffoldPadding),
@@ -118,6 +129,7 @@ viewModel: ProfileViewModel = koinViewModel()
             return@Scaffold
         }
 
+        // Main scrollable content container
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -127,6 +139,7 @@ viewModel: ProfileViewModel = koinViewModel()
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // Block 1: User's Profile Image, Name, and Email
             item {
 //                Spacer(Modifier.height(8.dp))
                 Personal_Info(state = state)
@@ -135,6 +148,7 @@ viewModel: ProfileViewModel = koinViewModel()
 
 
 
+            // Block 2: Quick user statistics (Orders, Saves, Points)
             item {
                 Spacer(Modifier.padding(12.dp))
                 Row{
@@ -148,6 +162,7 @@ viewModel: ProfileViewModel = koinViewModel()
                 }
             }
 
+            // Block 3: Vertical list of navigation menu options
             item {
                 Spacer(Modifier.padding(12.dp))
                 MenuColumnBox(
@@ -182,6 +197,7 @@ viewModel: ProfileViewModel = koinViewModel()
                 )
             }
 
+            // Block 4: Sign Out button
             item {
                 Spacer(Modifier.padding(16.dp))
                 Button(
@@ -201,6 +217,11 @@ viewModel: ProfileViewModel = koinViewModel()
     }
 }
 
+/**
+ * Component to display the user's personal information block.
+ * Shows an avatar placeholder along with the user's name and email.
+ * Includes a loading fallback if data is still fetching.
+ */
 @Composable
 fun Personal_Info(state: ProfileUiState){
     Column(
@@ -234,6 +255,14 @@ fun Personal_Info(state: ProfileUiState){
 }
 
 
+/**
+ * Reusable card component for displaying a specific statistic.
+ * For example: "ORDERS" - "2".
+ * 
+ * @param title The label or title of the statistic (e.g., "POINTS").
+ * @param value The actual value to display (e.g., "2.5K").
+ * @param modifier Modifier for external styling and layout configuration.
+ */
 @Composable
 fun InfoBox(title: String, value: String, modifier: Modifier = Modifier) {
     Box(
@@ -266,6 +295,16 @@ fun InfoBox(title: String, value: String, modifier: Modifier = Modifier) {
 }
 
 
+/**
+ * Reusable component for displaying a menu option row.
+ * Includes a leading icon, a text label, and a trailing navigation icon.
+ * Acts as a full-width clickable button.
+ *
+ * @param onClick Action to perform when the item is clicked.
+ * @param title The label text for this menu option.
+ * @param icon The leading icon indicating the option's purpose.
+ * @param trailingIcon The icon at the end (usually an arrow) to indicate navigation.
+ */
 @Composable
 fun MenuColumnBox(
     onClick: () -> Unit,
