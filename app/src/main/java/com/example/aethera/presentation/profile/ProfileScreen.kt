@@ -14,8 +14,12 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Payment
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.LocationOn
+import androidx.compose.material.icons.outlined.Payment
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.material3.OutlinedTextFieldDefaults.contentPadding
 import androidx.compose.runtime.*
@@ -149,31 +153,31 @@ viewModel: ProfileViewModel = koinViewModel()
                 MenuColumnBox(
                     onClick = onOrderHistory,
                     title = "My Orders",
-                    Icons.Default.ShoppingCart,
+                    Icons.Outlined.ShoppingCart,
                     Icons.AutoMirrored.Filled.KeyboardArrowRight
                 )
                 MenuColumnBox(
                     onClick = onWishlist,
                     title = "Wishlist",
-                    Icons.Filled.FavoriteBorder,
+                    Icons.Outlined.FavoriteBorder,
                     Icons.AutoMirrored.Filled.KeyboardArrowRight
                 )
                 MenuColumnBox(
                     onClick = onOrderHistory,
                     title = "Shipping Addresses",
-                    Icons.Filled.LocationOn,
+                    Icons.Outlined.LocationOn,
                     Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 )
                 MenuColumnBox(
                     onClick = onOrderHistory,
                     title = "Payment Methods",
-                    Icons.Default.Payment,
+                    Icons.Outlined.Payment,
                     Icons.AutoMirrored.Filled.KeyboardArrowRight
                 )
                 MenuColumnBox(
                     onClick = onOrderHistory,
                     title = "Settings",
-                    Icons.Default.ShoppingCart,
+                    Icons.Outlined.Settings,
                     Icons.AutoMirrored.Filled.KeyboardArrowRight
                 )
             }
@@ -200,7 +204,7 @@ viewModel: ProfileViewModel = koinViewModel()
 @Composable
 fun Personal_Info(state: ProfileUiState){
     Column(
-        modifier = Modifier.height(60.dp),
+        modifier = Modifier.fillMaxWidth().height(200.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
