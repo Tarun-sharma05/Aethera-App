@@ -44,11 +44,14 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
-    innerPadding   : PaddingValues,
-    onOrderHistory : () -> Unit,
-    onWishlist     : () -> Unit,
-    onLogout       : () -> Unit,
-    viewModel      : ProfileViewModel = koinViewModel(),
+    innerPadding        : PaddingValues,
+    onOrderHistory      : () -> Unit,
+    onWishlist          : () -> Unit,
+    onShippingAddresses : () -> Unit,
+    onPaymentMethods    : () -> Unit,
+    onSettings          : () -> Unit,
+    onLogout            : () -> Unit,
+    viewModel           : ProfileViewModel = koinViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
 //
@@ -59,18 +62,17 @@ fun ProfileScreen(
     val user = uiState.user
 //
 
-
-       ProfileContent(
-           state = uiState,
-           innerPadding =  innerPadding,
-           onOrderHistory = onOrderHistory,
-           onWishlist = onWishlist,
-           onLogout = onLogout,
-           viewModel = viewModel,
-
-       )
-
-
+    ProfileContent(
+        state               = uiState,
+        innerPadding        = innerPadding,
+        onOrderHistory      = onOrderHistory,
+        onWishlist          = onWishlist,
+        onShippingAddresses = onShippingAddresses,
+        onPaymentMethods    = onPaymentMethods,
+        onSettings          = onSettings,
+        onLogout            = onLogout,
+        viewModel           = viewModel,
+    )
 }
 
 /**
@@ -81,13 +83,16 @@ fun ProfileScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileContent(
-state: ProfileUiState,
-innerPadding   : PaddingValues,
-onOrderHistory : () -> Unit,
-onWishlist     : () -> Unit,
-onLogout       : () -> Unit,
-viewModel: ProfileViewModel = koinViewModel()
-){
+    state               : ProfileUiState,
+    innerPadding        : PaddingValues,
+    onOrderHistory      : () -> Unit,
+    onWishlist          : () -> Unit,
+    onShippingAddresses : () -> Unit,
+    onPaymentMethods    : () -> Unit,
+    onSettings          : () -> Unit,
+    onLogout            : () -> Unit,
+    viewModel           : ProfileViewModel = koinViewModel()
+) {
 //    val uiState by viewModel.uiState.collectAsState()
 //
 //    LaunchedEffect(uiState.isLoggedOut) {
@@ -167,33 +172,36 @@ viewModel: ProfileViewModel = koinViewModel()
                 Spacer(Modifier.padding(12.dp))
                 MenuColumnBox(
                     onClick = onOrderHistory,
-                    title = "My Orders",
-                    Icons.Outlined.ShoppingCart,
-                    Icons.AutoMirrored.Filled.KeyboardArrowRight
+                    title   = "My Orders",
+                    icon    = Icons.Outlined.ShoppingCart,
+                    trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight
                 )
                 MenuColumnBox(
                     onClick = onWishlist,
-                    title = "Wishlist",
-                    Icons.Outlined.FavoriteBorder,
-                    Icons.AutoMirrored.Filled.KeyboardArrowRight
+                    title   = "Wishlist",
+                    icon    = Icons.Outlined.FavoriteBorder,
+                    trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight
                 )
+                // Fix #1: Shipping Addresses now navigates to its own destination
                 MenuColumnBox(
-                    onClick = onOrderHistory,
-                    title = "Shipping Addresses",
-                    Icons.Outlined.LocationOn,
-                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                    onClick = onShippingAddresses,
+                    title   = "Shipping Addresses",
+                    icon    = Icons.Outlined.LocationOn,
+                    trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 )
+                // Fix #1: Payment Methods now navigates to its own destination
                 MenuColumnBox(
-                    onClick = onOrderHistory,
-                    title = "Payment Methods",
-                    Icons.Outlined.Payment,
-                    Icons.AutoMirrored.Filled.KeyboardArrowRight
+                    onClick = onPaymentMethods,
+                    title   = "Payment Methods",
+                    icon    = Icons.Outlined.Payment,
+                    trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight
                 )
+                // Fix #1: Settings now navigates to its own destination
                 MenuColumnBox(
-                    onClick = onOrderHistory,
-                    title = "Settings",
-                    Icons.Outlined.Settings,
-                    Icons.AutoMirrored.Filled.KeyboardArrowRight
+                    onClick = onSettings,
+                    title   = "Settings",
+                    icon    = Icons.Outlined.Settings,
+                    trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight
                 )
             }
 
