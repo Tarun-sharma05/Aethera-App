@@ -65,6 +65,22 @@ class ProfileViewModel(
         }.launchIn(viewModelScope)
     }
 
+    /**
+     * Fix #5: Persists [newAddress] to the user's Firestore document.
+     * Copies the current user object so all other fields are preserved.
+     */
+    fun updateAddress(newAddress: String) {
+        val currentUser = _uiState.value.user ?: return
+        val updatedUser = currentUser.copy(address = newAddress.trim())
+        userRepository.updateUser(updatedUser).onEach { result ->
+            when (result) {
+                is ResultState.Loading -> _uiState.value = _uiState.value.copy(isLoading = true)
+                is ResultState.Success -> _uiState.value = _uiState.value.copy(isLoading = false)
+                is ResultState.Error   -> _uiState.value = _uiState.value.copy(isLoading = false, error = result.error)
+            }
+        }.launchIn(viewModelScope)
+    }
+
     fun logout() {
         authRepository.logout().onEach { result ->
             if (result is ResultState.Success) _uiState.value = _uiState.value.copy(isLoggedOut = true)

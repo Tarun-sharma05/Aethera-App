@@ -1,11 +1,9 @@
 package com.example.aethera.presentation.profile
 
-import android.R.attr.bottom
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
@@ -13,7 +11,6 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Payment
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material.icons.outlined.Payment
@@ -21,19 +18,15 @@ import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.*
-import androidx.compose.material3.OutlinedTextFieldDefaults.contentPadding
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import org.koin.androidx.compose.koinViewModel
 
 /**
@@ -93,13 +86,21 @@ fun ProfileContent(
     onLogout            : () -> Unit,
     viewModel           : ProfileViewModel = koinViewModel()
 ) {
-//    val uiState by viewModel.uiState.collectAsState()
-//
-//    LaunchedEffect(uiState.isLoggedOut) {
-//        if (uiState.isLoggedOut) onLogout()
-//    }
-//
-//    val user = state.user
+    // Fix #5: Local dialog visibility state — keeps ViewModel free of UI concerns.
+    var showAddressDialog by remember { mutableStateOf(false) }
+
+    // Fix #5: Show address edit dialog when triggered by Shipping Addresses menu item.
+    if (showAddressDialog) {
+        AddressEditDialog(
+            currentAddress = state.user?.address ?: "",
+            onDismiss      = { showAddressDialog = false },
+            onSave         = { newAddress ->
+                viewModel.updateAddress(newAddress)
+                showAddressDialog = false
+            }
+        )
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -194,9 +195,9 @@ fun ProfileContent(
                     icon    = Icons.Outlined.FavoriteBorder,
                     trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight
                 )
-                // Fix #1: Shipping Addresses now navigates to its own destination
+                // Fix #5: Shipping Addresses now opens an edit dialog to manage the user's address.
                 MenuColumnBox(
-                    onClick = onShippingAddresses,
+                    onClick = { showAddressDialog = true },
                     title   = "Shipping Addresses",
                     icon    = Icons.Outlined.LocationOn,
                     trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight,
@@ -239,13 +240,13 @@ fun ProfileContent(
 
 /**
  * Component to display the user's personal information block.
- * Shows an avatar placeholder along with the user's name and email.
+ * Shows an avatar placeholder along with the user's name, email, and address (if set).
  * Includes a loading fallback if data is still fetching.
  */
 @Composable
-fun Personal_Info(state: ProfileUiState){
+fun Personal_Info(state: ProfileUiState) {
     Column(
-        modifier = Modifier.fillMaxWidth().height(200.dp),
+        modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -257,6 +258,7 @@ fun Personal_Info(state: ProfileUiState){
         )
 
         if (state.user != null) {
+            Spacer(Modifier.height(4.dp))
             Text(
                 state.user.name,
                 style = MaterialTheme.typography.headlineMedium,
@@ -267,10 +269,31 @@ fun Personal_Info(state: ProfileUiState){
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
+            // Fix #5: Show saved address below email so users know their current address at a glance.
+            if (state.user.address.isNotBlank()) {
+                Spacer(Modifier.height(4.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        imageVector          = Icons.Outlined.LocationOn,
+                        contentDescription   = "Address",
+                        modifier             = Modifier.size(14.dp),
+                        tint                 = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Spacer(Modifier.width(2.dp))
+                    Text(
+                        text  = state.user.address,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
+            Spacer(Modifier.height(8.dp))
         } else if (state.isLoading) {
             CircularProgressIndicator()
         }
-
     }
 }
 
@@ -371,3 +394,60 @@ fun MenuColumnBox(
 //    }
 }
 
+
+/**
+ * Fix #5: Dialog that lets the user view and edit their saved shipping address.
+ * Pre-fills with the current address from Firestore.
+ * On save, the trimmed address is passed up to [ProfileViewModel.updateAddress].
+ *
+ * @param currentAddress The address currently stored in Firestore for this user.
+ * @param onDismiss      Called when the user cancels without saving.
+ * @param onSave         Called with the new address string when the user taps Save.
+ */
+@Composable
+fun AddressEditDialog(
+    currentAddress : String,
+    onDismiss      : () -> Unit,
+    onSave         : (String) -> Unit
+) {
+    var address by remember(currentAddress) { mutableStateOf(currentAddress) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        icon  = {
+            Icon(
+                imageVector        = Icons.Outlined.LocationOn,
+                contentDescription = null,
+                tint               = MaterialTheme.colorScheme.primary
+            )
+        },
+        title = { Text("Shipping Address") },
+        text  = {
+            OutlinedTextField(
+                value         = address,
+                onValueChange = { address = it },
+                label         = { Text("Enter your full address") },
+                placeholder   = { Text("e.g. 123 Main St, New Delhi") },
+                leadingIcon   = {
+                    Icon(Icons.Outlined.LocationOn, contentDescription = null)
+                },
+                modifier      = Modifier.fillMaxWidth(),
+                singleLine    = false,
+                minLines      = 2,
+            )
+        },
+        confirmButton = {
+            TextButton(
+                onClick  = { onSave(address) },
+                enabled  = address.isNotBlank()
+            ) {
+                Text("Save", fontWeight = FontWeight.Bold)
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancel")
+            }
+        }
+    )
+}
