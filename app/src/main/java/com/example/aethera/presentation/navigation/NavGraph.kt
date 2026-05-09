@@ -145,10 +145,17 @@ fun AetheraNavGraph(startRoute: Route = Route.Splash) {
                     }
                     is Route.Profile -> NavEntry(key) {
                         ProfileScreen(
-                            innerPadding    = innerPadding,
-                            onOrderHistory  = { backStack.add(Route.OrderHistory) },
-                            onWishlist      = { backStack.add(Route.Wishlist) },
-                            onLogout        = {
+                            innerPadding        = innerPadding,
+                            onOrderHistory      = { backStack.add(Route.OrderHistory) },
+                            onWishlist          = { backStack.add(Route.Wishlist) },
+                            // Fix #1: Each menu item now has its own navigation callback.
+                            // TODO: Replace with dedicated Route.ShippingAddresses when screen is built.
+                            onShippingAddresses = { /* Coming Soon — Issue #4 will implement this */ },
+                            // TODO: Replace with dedicated Route.PaymentMethods when screen is built.
+                            onPaymentMethods    = { /* Coming Soon — dedicated screen is a future issue */ },
+                            // TODO: Replace with dedicated Route.Settings when screen is built.
+                            onSettings          = { /* Coming Soon — dedicated screen is a future issue */ },
+                            onLogout            = {
                                 backStack.clear()
                                 backStack.add(Route.Login)
                             }
