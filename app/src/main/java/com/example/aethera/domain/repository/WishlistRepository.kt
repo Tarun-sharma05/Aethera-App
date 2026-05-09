@@ -8,4 +8,6 @@ interface WishlistRepository {
     fun addToWishlist(userId: String, productId: String): Flow<ResultState<Unit>>
     fun removeFromWishlist(userId: String, productId: String): Flow<ResultState<Unit>>
     fun isInWishlist(userId: String, productId: String): Flow<ResultState<Boolean>>
+    /** Returns the total number of saved (wishlisted) items for [userId]. Used by ProfileScreen stats. */
+    fun getWishlistCount(userId: String): Flow<ResultState<Int>>
 }

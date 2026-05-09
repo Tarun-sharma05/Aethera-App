@@ -52,6 +52,6 @@ val appModule = module {
     viewModel { OrderViewModel(get()) }
     viewModel { (orderId: String) -> OrderDetailViewModel(get(), orderId) }
     viewModel { WishlistViewModel(get(), get()) }
-    viewModel { ProfileViewModel(get(), get()) }
+    viewModel { ProfileViewModel(get(), get(), get(), get()) } // Fix #3: inject orderRepository + wishlistRepository
     viewModel { SearchViewModel(get()) }
 }

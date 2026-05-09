@@ -8,4 +8,6 @@ interface OrderRepository {
     fun placeOrder(order: Order): Flow<ResultState<String>>   // returns orderId
     fun getOrders(userId: String): Flow<ResultState<List<Order>>>
     fun getOrderById(orderId: String): Flow<ResultState<Order>>
+    /** Returns the total number of orders placed by [userId]. Used by ProfileScreen stats. */
+    fun getOrderCount(userId: String): Flow<ResultState<Int>>
 }

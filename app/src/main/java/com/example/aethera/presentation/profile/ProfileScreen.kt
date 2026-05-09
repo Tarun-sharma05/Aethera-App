@@ -154,16 +154,28 @@ fun ProfileContent(
 
 
             // Block 2: Quick user statistics (Orders, Saves, Points)
+            // Fix #3: Values now come from Firestore via ProfileViewModel instead of being hardcoded.
             item {
                 Spacer(Modifier.padding(12.dp))
-                Row{
-                    InfoBox(title = "ORDERS", value = "2", modifier= Modifier.weight(1f))
+                Row {
+                    InfoBox(
+                        title    = "ORDERS",
+                        value    = state.orderCount.toString(),
+                        modifier = Modifier.weight(1f)
+                    )
                     Spacer(modifier = Modifier.width(12.dp))
-
-                    InfoBox(title = "SAVES", value = "2", modifier= Modifier.weight(1f))
+                    InfoBox(
+                        title    = "SAVES",
+                        value    = state.wishlistCount.toString(),
+                        modifier = Modifier.weight(1f)
+                    )
                     Spacer(modifier = Modifier.width(12.dp))
-
-                    InfoBox(title = "POINTS", value = "2.5K", modifier= Modifier.weight(1f))
+                    // TODO: Replace "—" with real points once a points/loyalty system is implemented.
+                    InfoBox(
+                        title    = "POINTS",
+                        value    = "—",
+                        modifier = Modifier.weight(1f)
+                    )
                 }
             }
 

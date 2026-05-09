@@ -50,4 +50,14 @@ class WishlistRepositoryImpl(
         }
         awaitClose { listener.remove() }
     }
+
+    /** Fix #3: Returns a live count of wishlisted items for [userId] to power the ProfileScreen stats widget. */
+    override fun getWishlistCount(userId: String): Flow<ResultState<Int>> = callbackFlow {
+        trySend(ResultState.Loading)
+        val listener = itemsRef(userId).addSnapshotListener { snap, err ->
+            if (err != null) { trySend(ResultState.Error(err.message ?: "Error")); return@addSnapshotListener }
+            trySend(ResultState.Success(snap?.size() ?: 0))
+        }
+        awaitClose { listener.remove() }
+    }
 }
