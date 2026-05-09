@@ -48,4 +48,16 @@ class OrderRepositoryImpl(
             }
         awaitClose { listener.remove() }
     }
+
+    /** Fix #3: Returns a live count of orders for [userId] to power the ProfileScreen stats widget. */
+    override fun getOrderCount(userId: String): Flow<ResultState<Int>> = callbackFlow {
+        trySend(ResultState.Loading)
+        val listener = db.collection(ORDERS)
+            .whereEqualTo("userId", userId)
+            .addSnapshotListener { snap, err ->
+                if (err != null) { trySend(ResultState.Error(err.message ?: "Error")); return@addSnapshotListener }
+                trySend(ResultState.Success(snap?.size() ?: 0))
+            }
+        awaitClose { listener.remove() }
+    }
 }
