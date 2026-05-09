@@ -56,7 +56,7 @@ fun ProfileScreen(
 //        if (uiState.isLoggedOut) onLogout()
 //    }
 //
-//    val user = uiState.user
+    val user = uiState.user
 //
 
 
