@@ -20,6 +20,7 @@ import com.example.aethera.presentation.orders.OrderHistoryScreen
 import com.example.aethera.presentation.product.ProductDetailScreen
 import com.example.aethera.presentation.profile.ProfileScreen
 import com.example.aethera.presentation.search.SearchScreen
+import com.example.aethera.presentation.settings.SettingsScreen
 import com.example.aethera.presentation.splash.SplashScreen
 import com.example.aethera.presentation.splash.OnboardingScreen
 import com.example.aethera.presentation.wishlist.WishlistScreen
@@ -154,7 +155,7 @@ fun AetheraNavGraph(startRoute: Route = Route.Splash) {
                             // TODO: Replace with dedicated Route.PaymentMethods when screen is built.
                             onPaymentMethods    = { /* Coming Soon — dedicated screen is a future issue */ },
                             // TODO: Replace with dedicated Route.Settings when screen is built.
-                            onSettings          = { /* Coming Soon — dedicated screen is a future issue */ },
+                            onSettings          = { backStack.add(Route.Settings)},
                             onLogout            = {
                                 backStack.clear()
                                 backStack.add(Route.Login)
@@ -198,6 +199,11 @@ fun AetheraNavGraph(startRoute: Route = Route.Splash) {
                             innerPadding   = innerPadding,
                             onProductClick = { productId -> backStack.add(Route.ProductDetail(productId)) },
                             onBack         = { backStack.removeLastOrNull() }
+                        )
+                    }
+                    is Route.Settings -> NavEntry(key){
+                        SettingsScreen(
+                            onBack = {backStack.removeLastOrNull()}
                         )
                     }
                     else -> error("Unknown route: $key")
