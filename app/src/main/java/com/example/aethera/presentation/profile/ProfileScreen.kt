@@ -100,7 +100,7 @@ fun ProfileContent(
 //    }
 //
 //    val user = state.user
-    Scaffold(
+       Scaffold(
         topBar = {
             TopAppBar(
                 navigationIcon = {
