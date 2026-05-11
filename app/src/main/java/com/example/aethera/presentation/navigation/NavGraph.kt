@@ -21,6 +21,7 @@ import com.example.aethera.presentation.product.ProductDetailScreen
 import com.example.aethera.presentation.profile.ProfileScreen
 import com.example.aethera.presentation.search.SearchScreen
 import com.example.aethera.presentation.settings.SettingsScreen
+import com.example.aethera.presentation.shippingaddress.ShippingAddressScreen
 import com.example.aethera.presentation.splash.SplashScreen
 import com.example.aethera.presentation.splash.OnboardingScreen
 import com.example.aethera.presentation.wishlist.WishlistScreen
@@ -47,6 +48,8 @@ fun AetheraNavGraph(startRoute: Route = Route.Splash) {
                     subclass(Route.OrderHistory::class,   Route.OrderHistory.serializer())
                     subclass(Route.OrderDetail::class,    Route.OrderDetail.serializer())
                     subclass(Route.Wishlist::class,       Route.Wishlist.serializer())
+                    subclass(Route.ShippingAddress::class, Route.ShippingAddress.serializer())
+                    subclass(Route.Settings::class,        Route.Settings.serializer())
                 }
             }
         },
@@ -149,12 +152,8 @@ fun AetheraNavGraph(startRoute: Route = Route.Splash) {
                             innerPadding        = innerPadding,
                             onOrderHistory      = { backStack.add(Route.OrderHistory) },
                             onWishlist          = { backStack.add(Route.Wishlist) },
-                            // Fix #1: Each menu item now has its own navigation callback.
-                            // TODO: Replace with dedicated Route.ShippingAddresses when screen is built.
-                            onShippingAddresses = { /* Coming Soon — Issue #4 will implement this */ },
-                            // TODO: Replace with dedicated Route.PaymentMethods when screen is built.
+                            onShippingAddresses = { backStack.add(Route.ShippingAddress) },
                             onPaymentMethods    = { /* Coming Soon — dedicated screen is a future issue */ },
-                            // TODO: Replace with dedicated Route.Settings when screen is built.
                             onSettings          = { backStack.add(Route.Settings)},
                             onLogout            = {
                                 backStack.clear()
@@ -201,11 +200,18 @@ fun AetheraNavGraph(startRoute: Route = Route.Splash) {
                             onBack         = { backStack.removeLastOrNull() }
                         )
                     }
-                    is Route.Settings -> NavEntry(key){
+                    is Route.Settings -> NavEntry(key) {
                         SettingsScreen(
-                            onBack = {backStack.removeLastOrNull()}
+                            onBack = { backStack.removeLastOrNull() }
                         )
                     }
+                    is Route.ShippingAddress -> NavEntry(key) {
+                        ShippingAddressScreen(
+                            innerPadding = innerPadding,
+                            onBack       = { backStack.removeLastOrNull() },
+                        )
+                    }
+
                     else -> error("Unknown route: $key")
                 }
             }
