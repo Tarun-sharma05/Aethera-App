@@ -22,6 +22,7 @@ import com.example.aethera.presentation.orders.OrderViewModel
 import com.example.aethera.presentation.product.ProductDetailViewModel
 import com.example.aethera.presentation.profile.ProfileViewModel
 import com.example.aethera.presentation.search.SearchViewModel
+import com.example.aethera.presentation.settings.SettingsViewModel
 import com.example.aethera.presentation.shippingaddress.ShippingAddressViewModel
 import com.example.aethera.presentation.wishlist.WishlistViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -55,6 +56,7 @@ val appModule = module {
     viewModel { WishlistViewModel(get(), get()) }
     viewModel { ProfileViewModel(get(), get(), get(), get()) } // Fix #3: inject orderRepository + wishlistRepository
     viewModel { SearchViewModel(get()) }
+    viewModel { SettingsViewModel(get(), get()) }              // UserRepository + AuthRepository
     viewModel { ShippingAddressViewModel(get()) }
 
 }

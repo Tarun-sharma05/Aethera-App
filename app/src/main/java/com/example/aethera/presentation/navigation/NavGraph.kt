@@ -202,7 +202,11 @@ fun AetheraNavGraph(startRoute: Route = Route.Splash) {
                     }
                     is Route.Settings -> NavEntry(key) {
                         SettingsScreen(
-                            onBack = { backStack.removeLastOrNull() }
+                            onBack   = { backStack.removeLastOrNull() },
+                            onLogout = {
+                                backStack.clear()
+                                backStack.add(Route.Login)
+                            },
                         )
                     }
                     is Route.ShippingAddress -> NavEntry(key) {
