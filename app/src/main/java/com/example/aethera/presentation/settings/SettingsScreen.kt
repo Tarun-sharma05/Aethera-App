@@ -33,7 +33,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.firebase.BuildConfig
+import com.example.aethera.BuildConfig
 import org.koin.compose.viewmodel.koinViewModel
 
 // ── Design tokens ────────────────────────────────────────────────────────────
