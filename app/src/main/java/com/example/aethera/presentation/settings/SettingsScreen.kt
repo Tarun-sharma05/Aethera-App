@@ -33,7 +33,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.aethera.BuildConfig
+import com.google.firebase.BuildConfig
 import org.koin.compose.viewmodel.koinViewModel
 
 // ── Design tokens ────────────────────────────────────────────────────────────
@@ -58,6 +58,7 @@ private const val TERMS_URL   = "https://example.com/terms"    // TODO: replace 
  * - [SettingsUiState.isSaved]     → shows "Saved!" Snackbar once then resets
  * - [SettingsUiState.isLoggedOut] → calls [onLogout] to pop the back stack to Login
  */
+
 @Composable
 fun SettingsScreen(
     onBack    : () -> Unit,

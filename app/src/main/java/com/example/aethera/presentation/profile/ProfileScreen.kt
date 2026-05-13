@@ -195,14 +195,21 @@ fun ProfileContent(
                     trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight
                 )
                 // Fix #1: Shipping Addresses now navigates to its own destination
-                MenuColumnBox(
-                    onClick = onShippingAddresses,
+//                MenuColumnBox(
+//                    onClick = onShippingAddresses,
+//                    title   = "Shipping Addresses",
+//                    icon    = Icons.Outlined.LocationOn,
+//                    trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+//                )
+                 MenuColumnBox(
+                    onClick = onShippingAddresses,   // ← this lambda
                     title   = "Shipping Addresses",
                     icon    = Icons.Outlined.LocationOn,
                     trailingIcon = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 )
+
                 // Fix #1: Payment Methods now navigates to its own destination
-                MenuColumnBox(
+                 MenuColumnBox(
                     onClick = onPaymentMethods,
                     title   = "Payment Methods",
                     icon    = Icons.Outlined.Payment,
