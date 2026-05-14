@@ -16,6 +16,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.automirrored.outlined.Logout
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -33,7 +34,6 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.aethera.BuildConfig
 import org.koin.compose.viewmodel.koinViewModel
 
 // ── Design tokens ────────────────────────────────────────────────────────────
@@ -241,7 +241,7 @@ fun SettingsContent(
                         InfoRow(
                             icon  = Icons.Outlined.Info,
                             label = "App Version",
-                            value = BuildConfig.VERSION_NAME,
+                            value = com.example.aethera.BuildConfig.VERSION_NAME,
                         )
                         SettingsDivider()
                         LinkRow(
@@ -272,7 +272,7 @@ fun SettingsContent(
                 item {
                     SettingsCard {
                         DangerRow(
-                            icon  = Icons.Outlined.Logout,
+                            icon  = Icons.AutoMirrored.Outlined.Logout,
                             label = "Sign Out",
                             onClick = { showLogoutDialog = true },
                         )
@@ -290,7 +290,7 @@ fun SettingsContent(
             onDismissRequest = { showLogoutDialog = false },
             icon             = {
                 Icon(
-                    Icons.Outlined.Logout,
+                    Icons.AutoMirrored.Outlined.Logout,
                     contentDescription = null,
                     tint               = DangerRed,
                 )
