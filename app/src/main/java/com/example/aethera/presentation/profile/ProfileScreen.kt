@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Menu
@@ -124,6 +125,7 @@ fun ProfileContent(
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.onPrimary)
             )
         }
+
     ) { scaffoldPadding ->
         // Display loading indicator centered on screen if data is still fetching
         if (state.isLoading) {
@@ -256,12 +258,47 @@ fun Personal_Info(state: ProfileUiState){
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Icon(
-            Icons.Outlined.Person,
-            contentDescription = null,
-            modifier = Modifier.size(72.dp),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant
-        )
+//        Icon(
+//            Icons.Outlined.Person,
+//            contentDescription = null,
+//            modifier = Modifier.size(72.dp),
+//            tint = MaterialTheme.colorScheme.onSurfaceVariant
+//        )
+
+        // Container to stack Person and Plus icons together
+        Box(
+            modifier = Modifier.size(72.dp) // Total boundary size for the icon group
+        ) {
+            // Main Profile Icon
+            Icon(
+                imageVector = Icons.Outlined.Person,
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(), // Takes up the 72.dp space
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+
+            // Overlaid Plus Icon
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd) // Force to bottom-right
+                    .size(24.dp) // Size of the plus icon container
+                    .background(
+                        color = MaterialTheme.colorScheme.primary,
+                        shape = CircleShape
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = "Edit or Add Profile Photo",
+                    modifier = Modifier.size(16.dp), // Size of the actual + sign
+                    tint = MaterialTheme.colorScheme.onPrimary
+                )
+            }
+        }
+
+
+
 
         if (state.user != null) {
             Text(
