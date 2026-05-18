@@ -17,6 +17,7 @@ import com.example.aethera.presentation.checkout.CheckoutScreen
 import com.example.aethera.presentation.home.HomeScreen
 import com.example.aethera.presentation.orders.OrderDetailScreen
 import com.example.aethera.presentation.orders.OrderHistoryScreen
+import com.example.aethera.presentation.paymentMethods.PaymentMethodsScreen
 import com.example.aethera.presentation.product.ProductDetailScreen
 import com.example.aethera.presentation.profile.ProfileScreen
 import com.example.aethera.presentation.search.SearchScreen
@@ -50,6 +51,7 @@ fun AetheraNavGraph(startRoute: Route = Route.Splash) {
                     subclass(Route.Wishlist::class,       Route.Wishlist.serializer())
                     subclass(Route.ShippingAddress::class, Route.ShippingAddress.serializer())
                     subclass(Route.Settings::class,        Route.Settings.serializer())
+                    subclass(Route.PaymentMethod::class, Route.PaymentMethod.serializer())
                 }
             }
         },
@@ -212,6 +214,11 @@ fun AetheraNavGraph(startRoute: Route = Route.Splash) {
                     is Route.ShippingAddress -> NavEntry(key) {
                         ShippingAddressScreen(
                             innerPadding = innerPadding,
+                            onBack       = { backStack.removeLastOrNull() },
+                        )
+                    }
+                    is Route.PaymentMethod -> NavEntry(key){
+                        PaymentMethodsScreen(
                             onBack       = { backStack.removeLastOrNull() },
                         )
                     }
